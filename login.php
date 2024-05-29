@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $user['id']; // Store user ID in session
         $_SESSION['username'] = $username; // Store username in session
 
-        header('Location: products.php'); 
+        header('Location: home.php'); 
         exit; // Stop script execution after redirect
       } else {
         $errors[] = "Invalid username or password.";
