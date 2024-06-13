@@ -1,0 +1,106 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    background: #556b2f;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2px;  
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    align-items: center; 
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 100%;
+    max-width: 400px;
+}
+.content {
+    overflow-y: auto; 
+    height: 100vh;  
+    text-align: center;  
+    padding:18em;
+
+}
+.content p {
+    text-align: center; 
+  }
+  
+
+h1 {
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+p {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  
+
+label {
+    margin-left:1em;
+    display: block;
+    text-align: left;
+    color: #fff;
+    margin-bottom: 0.5em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+    width: 90%;  
+    padding: 0.75em;
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+}
+
+.submit-btn {
+    width: 40%;  
+    padding: 0.75em 1em;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    margin-bottom: 1em;  
+}
+
+.submit-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.05);
+}
+
+.error {
+    color: red;
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+.success {
+    color: green;
+    text-align: left;
+    margin-bottom: 1em;
+}
