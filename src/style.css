@@ -1,6 +1,5 @@
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background: black;
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,9 +7,53 @@ body {
     align-items: center;
     height: 100vh;
     color: #fff;
-    background: #556b2f;
+    background: url(images/bg-wood.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+body.home {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url(images/bg-wood-2.jpg) no-repeat center center fixed;
+    background-size: cover;
+    color: #eee;
+}
+.navbar {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1em 0;
+    text-align: center;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
+.nav-list li {
+    margin: 0 1em;
+}
+
+.nav-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.nav-list a:hover {
+    color: #747474;
+}
 .container {
     text-align: center;
     background: rgba(255, 255, 255, 0.15);
@@ -24,40 +67,40 @@ body {
     width: 100%;
     max-width: 400px;
 }
+
 .content {
     overflow-y: auto; 
     height: 100vh;  
     text-align: center;  
     padding:18em;
-
 }
+
 .content p {
     text-align: center; 
-  }
-  
+}
 
 h1 {
-    color: #fff;
+    color: #000000;
     font-size: 2em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0;
     text-align: center;
 }
+
 p {
     font-family: Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    color: #fff;
+    color: #000000;
     text-align: center;
     margin-top: 1em;
     margin-bottom: 1em;
-  }
-  
+}
 
 label {
-    margin-left:1em;
+    margin-left: 1em;
     display: block;
     text-align: left;
-    color: #fff;
+    color: #000000;
     margin-bottom: 0.5em;
 }
 
@@ -72,7 +115,7 @@ input[type="password"] {
     border-radius: 5px;
     outline: none;
     background: rgba(255, 255, 255, 0.25);
-    color: #fff;
+    color: #000000;
 }
 
 .submit-btn {
@@ -81,7 +124,7 @@ input[type="password"] {
     border: none;
     border-radius: 25px;
     background: rgba(255, 255, 255, 0.25);
-    color: #fff;
+    color: #000000;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
@@ -94,13 +137,19 @@ input[type="password"] {
 }
 
 .error {
-    color: red;
+    color: #622f2e;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
     text-align: left;
-    margin-bottom: 1em;
 }
 
 .success {
-    color: green;
+    border: 1px solid #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
     text-align: left;
-    margin-bottom: 1em;
 }

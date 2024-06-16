@@ -2,6 +2,8 @@
 
 include 'connection.php';
 
+$errors = [];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $email_alias = mysqli_real_escape_string($conn, $_POST['email_alias']);
@@ -9,28 +11,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
 
-    $errors = []; 
-
+    // Validation
     if (empty($username)) {
         $errors[] = "Username is required.";
-    } else if (strlen($username) < 3) {
+    } elseif (strlen($username) < 3) {
         $errors[] = "Username must be at least 3 characters long.";
     }
 
     if (empty($email_alias)) {
         $errors[] = "Email is required.";
-    } else if (!filter_var($email_alias, FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($email_alias, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
     }
 
     if (empty($password)) {
         $errors[] = "Password is required.";
-    } else if (strlen($password) < 8) {
+    } elseif (strlen($password) < 8) {
         $errors[] = "Password must be at least 8 characters long.";
-    } else if ($password !== $confirm_password) {
+    } elseif ($password !== $confirm_password) {
         $errors[] = "Passwords do not match.";
     }
 
+    // Check for existing username
     $username_check_sql = "SELECT * FROM users WHERE username = '$username'";
     $username_check_result = $conn->query($username_check_sql);
 
@@ -38,20 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Username already exists. Please choose a different username.";
     }
 
-    if (count($errors) > 0) {
-        echo "<b>Error:</b><br>";
+    // If there are errors, display them
+    if (!empty($errors)) {
+        echo "<div class='error'><b>Error:</b><br>";
         foreach ($errors as $error) {
             echo " - " . $error . "<br>";
         }
+        echo "</div>";
     } else {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT); 
+        // Proceed with registration
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO users (username, email_alias, phone_alias, password, role, created_at) VALUES ('$username', '$email_alias', '$phone_alias', '$hashed_password', 'user', NOW())";
-        
+
         if ($conn->query($sql) === TRUE) {
-            echo "Registration successful!";
+            echo "<div class='success'>Registration successful!</div>";
         } else {
-            echo "Error: " . $conn->error;
+            echo "<div class='error'>Error: " . $conn->error . "</div>";
         }
     }
 
@@ -71,18 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <h1>Register</h1>
-        <?php
-        if (isset($errors) && count($errors) > 0) {
-            echo '<div class="error">';
-            echo '<b>Error:</b><br>';
-            foreach ($errors as $error) {
-                echo ' - ' . $error . '<br>';
-            }
-            echo '</div>';
-        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && count($errors) === 0) {
-            echo '<div class="success">Registration successful!</div>';
-        }
-        ?>
         <form action="registration.php" method="post">
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" required>

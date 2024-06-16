@@ -47,10 +47,10 @@
                         header('Location: home.php');
                         exit; 
                     } else {
-                        $errors[] = "Invalid username or password.";
+                        $errors[] = "Invalid username or password. Please try again";
                     }
                 } else {
-                    $errors[] = "Invalid username or password.";
+                    $errors[] = "Invalid username or password. Please try again";
                 }
 
                 if (count($errors) > 0) {
