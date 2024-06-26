@@ -14,16 +14,15 @@
         session_start();
 
         // Check if registration was successful (from session variable)
-        if (isset($_SESSION['registration_successful']) && $_SESSION['registration_successful'] === true) {
-            echo "<h1>Welcome, you have successfully registered!</h1>";
-            // Unset the session variable after displaying the message
+        if (isset($_SESSION['registration_successful'])) {
             unset($_SESSION['registration_successful']);
-        } else {
-            echo "<h1>Welcome, " . (isset($_SESSION['username']) ? $_SESSION['username'] : '') . "!</h1>";
         }
+        
+        // Display a generic welcome message
+        echo "<h1>Welcome!</h1>";
         ?>
 
-        <p>You are now logged in to District Market. Here are some options:</p>
+        <p>You are now logged in to District Market</p>
 
         
     </div>

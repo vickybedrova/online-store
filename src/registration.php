@@ -67,12 +67,12 @@ if (isset($_SESSION['registration_message']) && $_SESSION['registration_message'
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>District Market - Register Now</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Register</h1>
+        <h1>District Market <br> Register Now</h1>
         
         <?php if ($error_message): ?>
             <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
