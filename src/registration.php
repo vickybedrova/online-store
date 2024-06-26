@@ -2,6 +2,9 @@
 
 include('../config/dbcon.php');
 
+$error_message = '';
+$success_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['email_alias']) && isset($_POST['password'])) {
         $email = (string)$_POST['email_alias'];
@@ -14,14 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
 
             $createdUser = $auth->createUser($userProperties);
-            echo 'User created successfully. User ID: ' . (string)$createdUser->uid;
+            $success_message = 'User created successfully. User ID: ' . (string)$createdUser->uid;
         } catch (\Kreait\Firebase\Exception\AuthException $e) {
-            echo 'Error creating user: ' . (string)$e->getMessage();
+            $error_message = 'Error creating user: ' . (string)$e->getMessage();
         } catch (\Kreait\Firebase\Exception\FirebaseException $e) {
-            echo 'Firebase error: ' . (string)$e->getMessage();
+            $error_message = 'Firebase error: ' . (string)$e->getMessage();
         }
     } else {
-        echo 'Email and Password are required fields.';
+        $error_message = 'Email and Password are required fields.';
     }
 }
 ?>
@@ -37,7 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <h1>Register</h1>
-        <form action="registration.php" method="post">      
+        <?php if ($error_message): ?>
+            <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
+        <?php elseif ($success_message): ?>
+            <div class="success"><?php echo htmlspecialchars($success_message); ?></div>
+        <?php endif; ?>
+        <form action="registration.php" method="post">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+            
             <label for="email_alias">Email:</label>
             <input type="email" name="email_alias" id="email_alias" required>
 

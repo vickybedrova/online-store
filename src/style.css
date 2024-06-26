@@ -10,6 +10,7 @@ body {
     background: url(images/bg-wood.jpg) no-repeat center center fixed;
     background-size: cover;
 }
+
 body.home {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
@@ -22,6 +23,7 @@ body.home {
     background-size: cover;
     color: #eee;
 }
+
 .navbar {
     width: 100%;
     background: rgba(0, 0, 0, 0.7);
@@ -32,6 +34,7 @@ body.home {
     left: 0;
     z-index: 1000;
 }
+
 .nav-list {
     list-style: none;
     padding: 0;
@@ -54,25 +57,27 @@ body.home {
 .nav-list a:hover {
     color: #747474;
 }
+
 .container {
     text-align: center;
     background: rgba(255, 255, 255, 0.15);
-    padding: 2px;  
+    padding: 20px;  
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     align-items: center; 
     border-radius: 10px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    width: 100%;
+    width: 90%;  
     max-width: 400px;
+    margin-top: 50px; 
 }
 
 .content {
     overflow-y: auto; 
     height: 100vh;  
     text-align: center;  
-    padding:18em;
+    padding: 18em;
 }
 
 .content p {
@@ -108,9 +113,9 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="password"] {
-    width: 90%;  
+    width: calc(100% - 20px); 
     padding: 0.75em;
-    margin-bottom: 1em;
+    margin: 10px;  
     border: none;
     border-radius: 5px;
     outline: none;
@@ -119,7 +124,7 @@ input[type="password"] {
 }
 
 .submit-btn {
-    width: 40%;  
+    width: calc(100% - 40px); 
     padding: 0.75em 1em;
     border: none;
     border-radius: 25px;
@@ -128,7 +133,7 @@ input[type="password"] {
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
-    margin-bottom: 1em;  
+    margin: 10px; 
 }
 
 .submit-btn:hover {
@@ -137,19 +142,21 @@ input[type="password"] {
 }
 
 .error {
-    color: #622f2e;
+    background-color: #f8d7da; 
+    color: #721c24; 
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
+    border: 1px solid #f5c6cb; 
     text-align: left;
 }
 
 .success {
-    border: 1px solid #badbcc;
-    background-color: #d1e7dd;
-    color: #0f5132;
+    background-color: #d1e7dd; 
+    color: #0f5132;  
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
+    border: 1px solid #badbcc; 
     text-align: left;
 }
