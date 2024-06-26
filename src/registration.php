@@ -6,13 +6,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['email_alias']) && isset($_POST['password'])) {
         $email = (string)$_POST['email_alias'];
         $password = (string)$_POST['password'];
-        $username = isset($_POST['username']) ? (string)$_POST['username'] : '';
 
         try {
             $userProperties = [
                 'email' => $email,
-                'password' => $password,
-                'displayName' => $username
+                'password' => $password
             ];
 
             $createdUser = $auth->createUser($userProperties);
@@ -39,10 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <h1>Register</h1>
-        <form action="registration.php" method="post">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" required>
-            
+        <form action="registration.php" method="post">      
             <label for="email_alias">Email:</label>
             <input type="email" name="email_alias" id="email_alias" required>
 
