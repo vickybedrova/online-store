@@ -2,15 +2,7 @@
 
 session_start();
 
-include 'connection.php';
-
-if (!isset($_SESSION['cart'])) {
-  $_SESSION['cart'] = []; // Initialize empty cart if not set
-}
-
-$cart_items = $_SESSION['cart']; // Access cart items from session
-
-$total_price = 0;
+include('../config/dbcon.php');
 
 ?>
 
@@ -22,7 +14,7 @@ $total_price = 0;
 </head>
 <body>
     <h1>Shopping Cart</h1>
-    <?php if (count($cart_items) > 0) { ?>
+    <?php if (1 > 0) { ?>
       <table>
         <thead>
           <tr>
