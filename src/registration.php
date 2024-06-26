@@ -78,7 +78,7 @@ if (isset($_SESSION['registration_message']) && $_SESSION['registration_message'
             <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
         <?php elseif ($success_message): ?>
             <div class="success"><?php echo htmlspecialchars($success_message); ?></div>
-            <p>Please <a href="login.php">click here</a> to login.</p>
+            <p>Please wait, you will be redirected to <a href="login.php">login page</a> after 10 seconds.</p>
         <?php endif; ?>
         
         <form action="registration.php" method="post">
@@ -93,6 +93,10 @@ if (isset($_SESSION['registration_message']) && $_SESSION['registration_message'
             
             <input type="submit" value="Register" class="submit-btn">
         </form>
+
+        <div class="sign-in-message">
+            <p>Already registered? <a href="login.php">Sign in here</a>.</p>
+        </div>
     </div>
 </body>
 </html>
