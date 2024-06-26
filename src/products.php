@@ -1,7 +1,9 @@
 <?php
-include('../config/dbcon.php');
 
-// Fetch products from the database
+include 'connection.php'; 
+
+$sql = "SELECT * FROM product";
+$result = $conn->query($sql);
 
 ?>
 
@@ -10,44 +12,38 @@ include('../config/dbcon.php');
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
-    <link rel="stylesheet" href="style.css">
-    <?php include 'navigation-bar.php'; ?>
-
-
 </head>
 <body>
-    <div class="header">
-        <h1>Products</h1>
-        <h2>About Our Products</h2>
-    </div>
-    <div class="container">
-      
-       <!--products from DB to be here -->
-    </div>
+    <h1>Products</h1>
+    <?php if ($result->num_rows > 0) { ?>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php while ($product = $result->fetch_assoc()) { ?>
+          <tr>
+            <td><?php echo $product['name']; ?></td>
+            <td>$<?php echo number_format($product['price'], 2); ?></td>
+            <td><img src="<?php echo $product['image']; // Assuming an image field exists ?>" alt="<?php echo $product['name']; ?>"></td>
+            <td><?php echo $product['description']; ?></td>
+          </tr>
+        <?php } ?>
+        </tbody>
+      </table>
+    <?php } else { ?>
+      <p>No products found!</p>
+    <?php } ?>
 
-    <div class="modal" id="myModal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalDescription"></p>
-            <button onclick="order()">Order</button>
-        </div>
-    </div>
+    <h2>About Our Products</h2>
+    <p>Our products are carefully selected by a team of moderators with expertise in various categories. 
+       This ensures a high standard of quality and variety for our customers.</p>
 
-    <script>
-        function openModal(name, description) {
-            document.getElementById('modalTitle').textContent = name;
-            document.getElementById('modalDescription').textContent = description;
-            document.getElementById('myModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
-
-        function order() {
-            alert('Order button clicked! Implement your order functionality here.');
-        }
-    </script>
 </body>
 </html>
+
