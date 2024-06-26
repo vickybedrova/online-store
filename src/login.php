@@ -10,7 +10,14 @@
     <div class="container">
         <h1>Login</h1>
         <?php
-        include 'connection.php';
+        include('../config/dbcon.php');
+
+        use Kreait\Firebase\Factory;
+        use Kreait\Firebase\Exception\Auth\FailedToSignIn;
+
+// Initialize Firebase
+        $factory = (new Factory)->withServiceAccount(__DIR__ . '../config/firebase_credentials.json');
+        $auth = $factory->createAuth();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = mysqli_real_escape_string($conn, $_POST['username']);
