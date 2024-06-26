@@ -11,7 +11,7 @@
         <h1>Login</h1>
         <?php
         // Include Firebase PHP SDK and initialize Firebase Auth
-        require '../vendor/autoload.php'; // Adjust the path as necessary
+        require '../vendor/autoload.php';
         use Kreait\Firebase\Factory;
         use Kreait\Firebase\Auth;
 
@@ -47,10 +47,10 @@
                 echo '<div class="error">Email and password are required fields.</div>';
             }
         }
-?>
+        ?>
         <form action="login.php" method="post">
             <label for="Email">Email:</label>
-            <input type="text" name="Email" id="Email" required>
+            <input type="email" name="Email" id="Email" required>
             <br>
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" required>

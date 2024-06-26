@@ -13,18 +13,19 @@
         <?php
         session_start();
 
-        // Check if registration was successful (from session variable)
-        if (isset($_SESSION['registration_successful'])) {
-            unset($_SESSION['registration_successful']);
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: login.php');
+            exit;
         }
         
-        // Display a generic welcome message
-        echo "<h1>Welcome!</h1>";
+        // Retrieve username from session
+        $username = isset($_SESSION['Email']) ? $_SESSION['Email'] : '';
+
         ?>
 
+        <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1>
         <p>You are now logged in to District Market</p>
 
-        
     </div>
 </body>
 </html>
