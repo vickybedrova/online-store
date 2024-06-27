@@ -56,6 +56,9 @@
             <input type="password" name="password" id="password" required>
             <br>
             <input type="submit" value="Login" class="submit-btn">
+            <div class="sign-in-message">
+            <p>Not registered yet? <a href="registration.php">Sign up here</a>.</p>
+        </div>
         </form>
     </div>
 </body>
