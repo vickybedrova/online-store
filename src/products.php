@@ -8,8 +8,6 @@
 </head>
 <body>
     <div class="header">
-        <h1>Products</h1>
-        <h2>About Our Products</h2>
     </div>
     <div class="container">
         <!-- Product 1 -->
@@ -20,8 +18,11 @@
                 </a>
             </div>
             <div class="product-info">
-                <h2>Product Title 1</h2>
-                <p>Product Description 1</p>
+                <h2>Authentic Shrek <br> T-Shirt</h2>
+                <p>"Step into the swampy style of Shrek with this t-shirt that's more ogre than ordinary! 
+                    Embrace layers like onions and the charm of a true hero. 
+                    Whether you're rescuing princesses or just chilling in your swamp, this shirt screams 'I'm an ogre achiever!' 
+                    Guaranteed to turn heads faster than Donkey can talk!"</p>
                 <p>Price: $19.99</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="1">
@@ -96,7 +97,7 @@
         <div class="product-detail">
             <div class="product-image">
                 <a href="product_detail.php?id=5">
-                    <img src="./images/t-shirt-5.jpeg" alt="Product Image">
+                    <img src="./images/product-5.webp" alt="Product Image">
                 </a>
             </div>
             <div class="product-info">
@@ -116,12 +117,14 @@
         <div class="product-detail">
             <div class="product-image">
                 <a href="product_detail.php?id=6">
-                    <img src="./images/t-shirt-6.jpeg" alt="Product Image">
+                    <img src="./images/product-6.webp" alt="Product Image">
                 </a>
             </div>
             <div class="product-info">
-                <h2>Product Title 6</h2>
-                <p>Product Description 6</p>
+                <h2>Green Ogre T-Shirt</h2>
+                <p>Get ogre-whelmed with this Shrek-tastic t-shirt! 
+                    It's layers of fun and ogre charm, perfect for any swamp adventure or just chilling like a true hero. 
+                    Embrace your inner ogre and let the laughs roll!</p>
                 <p>Price: $69.99</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="6">
@@ -136,7 +139,7 @@
         <div class="product-detail">
             <div class="product-image">
                 <a href="product_detail.php?id=7">
-                    <img src="./images/t-shirt-7.jpeg" alt="Product Image">
+                    <img src="./images/product-7.jpeg" alt="Product Image">
                 </a>
             </div>
             <div class="product-info">
@@ -156,7 +159,7 @@
         <div class="product-detail">
             <div class="product-image">
                 <a href="product_detail.php?id=8">
-                    <img src="./images/t-shirt-8.jpeg" alt="Product Image">
+                    <img src="./images/product-8.webp" alt="Product Image">
                 </a>
             </div>
             <div class="product-info">
@@ -167,46 +170,6 @@
                     <input type="hidden" name="product_id" value="8">
                     <label for="quantity8">Quantity:</label>
                     <input type="number" id="quantity8" name="quantity" value="1" min="1" max="10">
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Product 9 -->
-        <div class="product-detail">
-            <div class="product-image">
-                <a href="product_detail.php?id=9">
-                    <img src="./images/t-shirt-9.jpeg" alt="Product Image">
-                </a>
-            </div>
-            <div class="product-info">
-                <h2>Product Title 9</h2>
-                <p>Product Description 9</p>
-                <p>Price: $99.99</p>
-                <form action="add_to_cart.php" method="post">
-                    <input type="hidden" name="product_id" value="9">
-                    <label for="quantity9">Quantity:</label>
-                    <input type="number" id="quantity9" name="quantity" value="1" min="1" max="10">
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Product 10 -->
-        <div class="product-detail">
-            <div class="product-image">
-                <a href="product_detail.php?id=10">
-                    <img src="./images/t-shirt-10.jpeg" alt="Product Image">
-                </a>
-            </div>
-            <div class="product-info">
-                <h2>Product Title 10</h2>
-                <p>Product Description 10</p>
-                <p>Price: $109.99</
-                <form action="add_to_cart.php" method="post">
-                    <input type="hidden" name="product_id" value="10">
-                    <label for="quantity10">Quantity:</label>
-                    <input type="number" id="quantity10" name="quantity" value="1" min="1" max="10">
                     <button type="submit">Add to Cart</button>
                 </form>
             </div>
