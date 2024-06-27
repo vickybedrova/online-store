@@ -2,6 +2,26 @@
 session_start();
 include('../config/dbcon.php'); // Include Firebase configuration
 
+if (isset($_SESSION['user_id'])) {
+    $idToken = $_SESSION['user_id'];
+} else {
+    echo "Firebase ID token not found in session.";
+    exit();
+}
+
+try {
+    // Retrieve user's custom claims
+    $userRecord = $auth->getUser($idToken);
+    $customClaims = $userRecord->customClaims;
+
+    // Check if user is admin
+    $isAdmin = isset($customClaims['admin']) && $customClaims['admin'];
+} catch (\Exception $e) {
+    // Handle errors
+    echo 'Error: ' . $e->getMessage();
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['action']) && $_POST['action'] == 'add_to_cart') {
         // Add to cart functionality
@@ -83,6 +103,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo '<p>No products available.</p>';
         }
         ?>
+
+        <!-- Display add product form for admins -->
+        <?php if ($isAdmin) : ?>
+            <h2>Add New Product</h2>
+            <form action="products.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="add_product">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required><br><br>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" min="0" step="0.01" required><br><br>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" required><br><br>
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required><br><br>
+                <button type="submit">Add Product</button>
+            </form>
+        <?php endif; ?>
+
     </div>
 
     <div class="modal" id="myModal">
