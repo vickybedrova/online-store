@@ -22,41 +22,57 @@ try {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['action']) && $_POST['action'] == 'add_to_cart') {
-        // Add to cart functionality
-        $productId = $_POST['product_id'];
-        $quantity = intval($_POST['quantity']);
+// Handle form submission to add a new product
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_product' && $isAdmin) {
+    // Validate and sanitize form inputs
+    $title = htmlspecialchars($_POST['title']);
+    $description = htmlspecialchars($_POST['description']);
+    $price = floatval($_POST['price']);
+    $quantity = intval($_POST['quantity']);
 
-        // Fetch product details from Firebase
-        $productRef = $database->getReference('products/' . $productId);
-        $product = $productRef->getValue();
+    // Upload image file
+    $targetDir = "./images/";
+    $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if ($product && $quantity > 0 && $quantity <= $product['quantity']) {
-            // Add to cart
-            if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = [];
-            }
-
-            if (isset($_SESSION['cart'][$productId])) {
-                $_SESSION['cart'][$productId]['quantity'] += $quantity;
-            } else {
-                $_SESSION['cart'][$productId] = [
-                    'id' => $productId,
-                    'title' => $product['title'],
-                    'price' => $product['price'],
-                    'quantity' => $quantity
-                ];
-            }
-
-            echo 'Product added to cart successfully!';
-        } else {
-            echo 'Invalid quantity or product not available!';
-        }
-
-        // Stop further execution after sending the response
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if ($check === false) {
+        echo "File is not an image.";
         exit();
     }
+
+    // Check if file already exists
+    if (file_exists($targetFile)) {
+        echo "Sorry, file already exists.";
+        exit();
+    }
+
+    // Allow certain file formats
+    if ($imageFileType !== "jpg" && $imageFileType !== "png" && $imageFileType !== "jpeg" && $imageFileType !== "gif") {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        exit();
+    }
+
+    // Move uploaded file to target directory
+    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+        echo "Sorry, there was an error uploading your file.";
+        exit();
+    }
+
+    // Insert new product into Firebase Realtime Database
+    $newProductRef = $database->getReference('products')->push();
+    $newProductRef->set([
+        'title' => $title,
+        'description' => $description,
+        'price' => $price,
+        'image' => $targetFile,
+        'quantity' => $quantity
+    ]);
+
+    // Redirect to products.php or display success message
+    header('Location: products.php');
+    exit();
 }
 ?>
 <!DOCTYPE html>
