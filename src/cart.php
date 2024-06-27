@@ -2,7 +2,7 @@
 
 session_start();
 
-include 'connection.php';
+include('../config/dbcon.php');
 
 if (!isset($_SESSION['cart'])) {
   $_SESSION['cart'] = []; // Initialize empty cart if not set
