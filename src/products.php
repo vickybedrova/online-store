@@ -200,20 +200,5 @@
         </div>
     </div>
 
-    <script>
-        function openModal(name, description) {
-            document.getElementById('modalTitle').textContent = name;
-            document.getElementById('modalDescription').textContent = description;
-            document.getElementById('myModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
-
-        function order() {
-            alert('Order button clicked! Implement your order functionality here.');
-        }
-    </script>
 </body>
 </html>
