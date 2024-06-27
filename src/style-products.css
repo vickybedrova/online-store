@@ -1,0 +1,182 @@
+/* style.css for Products Page */
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Ensure body is a column layout */
+    align-items: center;
+    color: #fff;
+    background: url(images/bg-bricks.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.navbar {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.59);
+    padding: 1em 0;
+    text-align: center;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.nav-list li {
+    margin: 0 1em;
+}
+
+.nav-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    transition: background 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.nav-list a:hover {
+    background: #555;
+    color: #fff;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #D5D5D5;    
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(142, 83, 83, 0.18);
+    width: 90%;  
+    max-width: 1200px;
+    margin-top: 80px; /* Adjust margin-top to ensure it's below navbar */
+    margin-bottom: 20px; /* Add margin-bottom to prevent content from sticking to bottom */
+}
+
+.product-detail {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.product-detail:hover {
+    transform: translateY(-5px);
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-info h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #000000;
+}
+
+.product-info p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.product-info form {
+    margin-top: 10px;
+}
+
+.product-info form label,
+.product-info form input,
+.product-info form button {
+    display: block;
+    margin: 10px auto;
+}
+
+.product-info form input[type="number"] {
+    width: 50%;
+    padding: 5px;
+}
+
+.product-info form button {
+    background-color: #000000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product-info form button:hover {
+    background-color: #555555;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 80%;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
