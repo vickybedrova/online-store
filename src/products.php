@@ -1,3 +1,44 @@
+<?php
+session_start();
+include('../config/dbcon.php'); // Include Firebase configuration
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['action']) && $_POST['action'] == 'add_to_cart') {
+        // Add to cart functionality
+        $productId = $_POST['product_id'];
+        $quantity = intval($_POST['quantity']);
+
+        // Fetch product details from Firebase
+        $productRef = $database->getReference('products/' . $productId);
+        $product = $productRef->getValue();
+
+        if ($product && $quantity > 0 && $quantity <= $product['quantity']) {
+            // Add to cart
+            if (!isset($_SESSION['cart'])) {
+                $_SESSION['cart'] = [];
+            }
+
+            if (isset($_SESSION['cart'][$productId])) {
+                $_SESSION['cart'][$productId]['quantity'] += $quantity;
+            } else {
+                $_SESSION['cart'][$productId] = [
+                    'id' => $productId,
+                    'title' => $product['title'],
+                    'price' => $product['price'],
+                    'quantity' => $quantity
+                ];
+            }
+
+            echo 'Product added to cart successfully!';
+        } else {
+            echo 'Invalid quantity or product not available!';
+        }
+
+        // Stop further execution after sending the response
+        exit();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +51,6 @@
     <div class="header"></div>
     <div class="container">
         <?php
-        include('../config/dbcon.php'); // Include Firebase configuration
-
         $productsRef = $database->getReference('products');
         $products = $productsRef->getValue();
 
@@ -29,12 +68,12 @@
                     echo '<p>' . $product['description'] . '</p>';
                     echo '<p>Price: $' . $product['price'] . '</p>';
                     echo '<p>Quantity: ' . $product['quantity'] . '</p>';
-                    echo '<form action="cart.php" method="post">';
+                    echo '<form id="add-to-cart-form-' . $id . '">';
                     echo '<input type="hidden" name="action" value="add_to_cart">';
                     echo '<input type="hidden" name="product_id" value="' . $id . '">';
                     echo '<label for="quantity' . $id . '">Quantity:</label>';
                     echo '<input type="number" id="quantity' . $id . '" name="quantity" value="1" min="1" max="' . $product['quantity'] . '">';
-                    echo '<button type="submit">Add to Cart</button>';
+                    echo '<button type="button" onclick="addToCart(' . $id . ')">Add to Cart</button>';
                     echo '</form>';
                     echo '</div>';
                     echo '</div>';
@@ -67,6 +106,23 @@
 
         function order() {
             alert('Order button clicked! Implement your order functionality here.');
+        }
+
+        function addToCart(productId) {
+            var form = document.getElementById('add-to-cart-form-' + productId);
+            var formData = new FormData(form);
+
+            fetch('products.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data); // Show the response message
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>
