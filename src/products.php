@@ -24,6 +24,7 @@
                     Whether you're rescuing princesses or just chilling in your swamp, this shirt screams 'I'm an ogre achiever!' 
                     Guaranteed to turn heads faster than Donkey can talk!"</p>
                 <p>Price: $19.99</p>
+                <p>Quantity: 3</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="1">
                     <label for="quantity1">Quantity:</label>
@@ -45,6 +46,7 @@
                 <p>Cuddle up with everyone's favorite ogre! Our plushie Shrek toy brings the magic of the swamp into your arms. 
                     Soft, green, and irresistibly charming, it's perfect for fans of all ages who love a hug from Shrek.</p>
                 <p>Price: $29.99</p>
+                <p>Quantity: 5</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="2">
                     <label for="quantity2">Quantity:</label>
@@ -66,6 +68,7 @@
                 <p>Wrap yourself in ogre-sized comfort with our Shrek-themed hoodie. 
                     Perfect for swampy adventures or just lounging like an ogre boss. Get cozy, Shrek style!</p>
                 <p>Price: $39.99</p>
+                <p>Quantity: 7</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="3">
                     <label for="quantity3">Quantity:</label>
@@ -88,6 +91,7 @@
                     but a companion on your daily adventures. 
                     Featuring Shrek's iconic face, it's a fun and practical way to show off your love for the beloved ogre."</p>
                 <p>Price: $49.99</p>
+                <p>Quantity: 4</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="4">
                     <label for="quantity4">Quantity:</label>
@@ -105,10 +109,11 @@
                 </a>
             </div>
             <div class="product-info">
-                <h2>Black Orge Hoodie</h2>
+                <h2>Black Ogre Hoodie</h2>
                 <p>Embrace your inner ogre with our Shrek-inspired hoodie. 
                     Whether you're out chasing dragons or chilling in your swamp, stay warm and whimsical in this ogre-ific hoodie!</p>
                 <p>Price: $59.99</p>
+                <p>Quantity: 6</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="5">
                     <label for="quantity5">Quantity:</label>
@@ -131,6 +136,7 @@
                     It's layers of fun and ogre charm, perfect for any swamp adventure or just chilling like a true hero. 
                     Embrace your inner ogre and let the laughs roll!</p>
                 <p>Price: $69.99</p>
+                <p>Quantity: 2</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="6">
                     <label for="quantity6">Quantity:</label>
@@ -152,6 +158,7 @@
                 <p>Celebrate love, laughter, and ogre-joy with our Fiona and Shrek white t-shirt. Featuring the dynamic duo in a whimsical design, 
                     this shirt is perfect for fans of the iconic fairy tale couple. Comfortable and charming, it's a must-have addition to any Shrek fan's wardrobe.</p>
                 <p>Price: $79.99</p>
+                <p>Quantity: 8</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="7">
                     <label for="quantity7">Quantity:</label>
@@ -174,6 +181,7 @@
                     Whether you're off on a fairy tale quest or just cozying up at home, 
                     this hoodie is your go-to for comfort and Shrektacular style!</p>
                 <p>Price: $89.99</p>
+                <p>Quantity: 9</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="8">
                     <label for="quantity8">Quantity:</label>
@@ -189,7 +197,6 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2 id="modalTitle"></h2>
             <p id="modalDescription"></p>
-            <button onclick="order()">Order</button>
         </div>
     </div>
 
