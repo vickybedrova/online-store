@@ -70,29 +70,89 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <?php include 'navigation-bar.php'; ?>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+
+        .cart-item h2 {
+            margin: 5px 0;
+            color: black;
+        }
+
+        .cart-item p {
+            margin: 5px 0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .empty-cart {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .order-btn {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .order-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Shopping Cart</h1>
-    <div class="cart">
-        <?php
-        if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-            foreach ($_SESSION['cart'] as $item) {
-                echo '<div class="cart-item">';
-                echo '<h2>' . $item['title'] . '</h2>';
-                echo '<p>Price: $' . $item['price'] . '</p>';
-                echo '<p>Quantity: ' . $item['quantity'] . '</p>';
-                echo '</div>';
-            }
-        } else {
-            echo '<p>Your cart is empty.</p>';
-        }
-        ?>
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
+            <?php foreach ($_SESSION['cart'] as $item): ?>
+                <div class="cart-item">
+                    <h2><?php echo $item['title']; ?></h2>
+                    <p>Price: $<?php echo number_format($item['price'], 2); ?></p>
+                    <p>Quantity: <?php echo $item['quantity']; ?></p>
+                </div>
+            <?php endforeach; ?>
+            <form action="cart.php" method="post">
+                <input type="hidden" name="action" value="place_order">
+                <button type="submit" class="order-btn">Place Order</button>
+            </form>
+        <?php else: ?>
+            <p class="empty-cart">Your cart is empty.</p>
+        <?php endif; ?>
     </div>
-    <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
-    <form action="cart.php" method="post">
-        <input type="hidden" name="action" value="place_order">
-        <button type="submit">Place Order</button>
-    </form>
-    <?php endif; ?>
 </body>
 </html>

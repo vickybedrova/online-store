@@ -8,7 +8,6 @@
         <li><a href="cart.php">View Cart</a></li>
         <li>
             <?php
-            session_start();
             $username = isset($_SESSION['Email']) ? $_SESSION['Email'] : '';
             if ($username) {
                 echo '<span>Logged in as: ' . htmlspecialchars($username) . '!</span>';
