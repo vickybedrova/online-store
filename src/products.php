@@ -41,8 +41,9 @@
                 </a>
             </div>
             <div class="product-info">
-                <h2>Product Title 2</h2>
-                <p>Product Description 2</p>
+                <h2>Shrek Plushie</h2>
+                <p>Cuddle up with everyone's favorite ogre! Our plushie Shrek toy brings the magic of the swamp into your arms. 
+                    Soft, green, and irresistibly charming, it's perfect for fans of all ages who love a hug from Shrek.</p>
                 <p>Price: $29.99</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="2">
@@ -61,8 +62,9 @@
                 </a>
             </div>
             <div class="product-info">
-                <h2>Product Title 3</h2>
-                <p>Product Description 3</p>
+                <h2>Grey Comfy Hoodie</h2>
+                <p>Wrap yourself in ogre-sized comfort with our Shrek-themed hoodie. 
+                    Perfect for swampy adventures or just lounging like an ogre boss. Get cozy, Shrek style!</p>
                 <p>Price: $39.99</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="3">
@@ -81,8 +83,10 @@
                 </a>
             </div>
             <div class="product-info">
-                <h2>Product Title 4</h2>
-                <p>Product Description 4</p>
+                <h2>Shrek Bottle</h2>
+                <p>Stay hydrated with a touch of Shrek whimsy! Our Shrek bottle is not just a container, 
+                    but a companion on your daily adventures. 
+                    Featuring Shrek's iconic face, it's a fun and practical way to show off your love for the beloved ogre."</p>
                 <p>Price: $49.99</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="4">
@@ -101,8 +105,9 @@
                 </a>
             </div>
             <div class="product-info">
-                <h2>Product Title 5</h2>
-                <p>Product Description 5</p>
+                <h2>Black Orge Hoodie</h2>
+                <p>Embrace your inner ogre with our Shrek-inspired hoodie. 
+                    Whether you're out chasing dragons or chilling in your swamp, stay warm and whimsical in this ogre-ific hoodie!</p>
                 <p>Price: $59.99</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="5">
@@ -143,8 +148,9 @@
                 </a>
             </div>
             <div class="product-info">
-                <h2>Product Title 7</h2>
-                <p>Product Description 7</p>
+                <h2>Fiona and Shrek Limited T-Shirt</h2>
+                <p>Celebrate love, laughter, and ogre-joy with our Fiona and Shrek white t-shirt. Featuring the dynamic duo in a whimsical design, 
+                    this shirt is perfect for fans of the iconic fairy tale couple. Comfortable and charming, it's a must-have addition to any Shrek fan's wardrobe.</p>
                 <p>Price: $79.99</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="7">
@@ -163,8 +169,10 @@
                 </a>
             </div>
             <div class="product-info">
-                <h2>Product Title 8</h2>
-                <p>Product Description 8</p>
+                <h2>Green Shrek Hoodie</h2>
+                <p>Channel your inner ogre with our Shrek-themed hoodie. 
+                    Whether you're off on a fairy tale quest or just cozying up at home, 
+                    this hoodie is your go-to for comfort and Shrektacular style!</p>
                 <p>Price: $89.99</p>
                 <form action="add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="8">
