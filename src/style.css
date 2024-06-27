@@ -73,6 +73,29 @@ body.home {
     color: #fff;
 }
 
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1em;
+    }
+
+    .nav-list {
+        margin: 1em 0 0;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-list li {
+        margin: 0.5em 0;
+    }
+
+    .nav-list a {
+        padding: 0.5em 0.8em;
+    }
+}
+
+
 .container {
     text-align: center;
     background-color: #D5D5D5;    
@@ -200,38 +223,4 @@ input[type="password"] {
 .product .price {
     color: #888;
     margin-bottom: 10px;
-}
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-}
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 80%;
-}
-.modal-content h2 {
-    margin-top: 0;
-}
-.modal-content p {
-    margin-bottom: 20px;
-}
-.modal-content button {
-    padding: 10px 20px;
-    background-color: #000000;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
 }
