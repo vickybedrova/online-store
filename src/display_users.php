@@ -28,24 +28,18 @@ try {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['uid']) && isset($_POST['role'])) {
-        $uid = $_POST['uid'];
-        $role = $_POST['role'];
-
-        // Set custom claims based on role
-        $customClaims = [
-            'admin' => ($role === 'admin'), // Set 'admin' claim based on role selection
-        ];
-
-        try {
-            $auth->setCustomUserClaims($uid, $customClaims);
-            echo "Custom claims have been set for user with UID: $uid" . PHP_EOL;
-        } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
-            echo 'User not found' . PHP_EOL;
-        } catch (\Exception $e) {
-            echo 'Error setting custom claims: ' . $e->getMessage() . PHP_EOL;
-        }
+// Handle user deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
+    $uidToDelete = $_POST['delete_user'];
+    
+    try {
+        // Delete the user
+        $auth->deleteUser($uidToDelete);
+        echo "User with UID: $uidToDelete has been successfully deleted.";
+    } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+        echo "User with UID: $uidToDelete not found.";
+    } catch (\Exception $e) {
+        echo 'Error deleting user: ' . $e->getMessage();
     }
 }
 
@@ -95,6 +89,10 @@ $users = $auth->listUsers($defaultMaxResults = 1000, $defaultBatchSize = 1000);
                             <option value="admin">Admin</option>
                         </select>
                         <button type="submit">Set Role</button>
+                    </form>
+                    <form method="post">
+                        <input type="hidden" name="delete_user" value="<?php echo $userRecord->uid; ?>">
+                        <button type="submit">Delete User</button>
                     </form>
                 </td>
             </tr>

@@ -1,127 +1,98 @@
 <?php
-include('../config/dbcon.php');
+session_start();
+include('../config/dbcon.php'); // Include Firebase configuration
 
-if (!isset($_SESSION['cart'])) {
-  $_SESSION['cart'] = []; // Initialize empty cart if not set
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['action']) && $_POST['action'] == 'add_to_cart') {
+        // Add to cart functionality
+        $productId = $_POST['product_id'];
+        $quantity = intval($_POST['quantity']);
+
+        // Fetch product details from Firebase
+        $productRef = $database->getReference('products/' . $productId);
+        $product = $productRef->getValue();
+
+        if ($product && $quantity > 0 && $quantity <= $product['quantity']) {
+            // Add to cart
+            if (!isset($_SESSION['cart'])) {
+                $_SESSION['cart'] = [];
+            }
+
+            if (isset($_SESSION['cart'][$productId])) {
+                $_SESSION['cart'][$productId]['quantity'] += $quantity;
+            } else {
+                $_SESSION['cart'][$productId] = [
+                    'id' => $productId,
+                    'title' => $product['title'],
+                    'price' => $product['price'],
+                    'quantity' => $quantity
+                ];
+            }
+
+            echo 'Product added to cart successfully!';
+        } else {
+            echo 'Invalid quantity or product not available!';
+        }
+    } elseif (isset($_POST['action']) && $_POST['action'] == 'place_order') {
+        // Place order functionality
+        if (isset($_SESSION['cart'])) {
+            $cart = $_SESSION['cart'];
+            $orderSuccess = true;
+
+            foreach ($cart as $productId => $item) {
+                $productRef = $database->getReference('products/' . $productId);
+                $product = $productRef->getValue();
+
+                if ($product && $item['quantity'] <= $product['quantity']) {
+                    // Deduct the quantity from the product stock
+                    $newQuantity = $product['quantity'] - $item['quantity'];
+                    $productRef->update(['quantity' => $newQuantity]);
+                } else {
+                    $orderSuccess = false;
+                    break;
+                }
+            }
+
+            if ($orderSuccess) {
+                // Clear the cart
+                unset($_SESSION['cart']);
+                echo 'Order placed successfully!';
+            } else {
+                echo 'Failed to place order due to insufficient stock.';
+            }
+        }
+    }
 }
-
-$cart_items = $_SESSION['cart']; // Access cart items from session
-
-$total_price = 0;
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="style.css">
-    <?php include 'navigation-bar.php'; ?>
-
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        input[type="number"] {
-            width: 50px;
-        }
-
-        p {
-            margin-bottom: 10px;
-        }
-
-        a {
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Cart</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Shopping Cart</h1>
-        <?php if (count($cart_items) > 0) { ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($cart_items as $item_id => $item_data) {
-                        $product_id = $item_id;
-                        $quantity = $item_data['quantity'];
-
-                        $sql = "SELECT * FROM product WHERE id = $product_id";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            $product = $result->fetch_assoc();
-                            $price = $product['price'];
-                            $subtotal = $price * $quantity;
-                            $total_price += $subtotal;
-                        } else {
-                            // Handle product not found error (remove from cart?)
-                        } ?>
-                        <tr>
-                            <td><?php echo $product['name']; ?></td>
-                            <td>$<?php echo number_format($price, 2); ?></td>
-                            <td><input type="number" min="1" value="<?php echo $quantity; ?>"></td>
-                            <td>$<?php echo number_format($subtotal, 2); ?></td>
-                            <td><a href="update_cart.php?id=<?php echo $product_id; ?>&action=remove">Remove</a></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-            <p>Total Price: $<?php echo number_format($total_price, 2); ?></p>
-            <a href="checkout.php">Proceed to Checkout</a>
-        <?php } else { ?>
-            <p>Your cart is empty!</p>
-        <?php } ?>
+    <h1>Shopping Cart</h1>
+    <div class="cart">
+        <?php
+        if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $item) {
+                echo '<div class="cart-item">';
+                echo '<h2>' . $item['title'] . '</h2>';
+                echo '<p>Price: $' . $item['price'] . '</p>';
+                echo '<p>Quantity: ' . $item['quantity'] . '</p>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>Your cart is empty.</p>';
+        }
+        ?>
     </div>
+    <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
+    <form action="cart.php" method="post">
+        <input type="hidden" name="action" value="place_order">
+        <button type="submit">Place Order</button>
+    </form>
+    <?php endif; ?>
 </body>
 </html>
